@@ -10,14 +10,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 #[Route('/project')]
 class ProjectController extends AbstractController
 {
     #[Route('/', name: 'project_index', methods: ['GET'])]
     public function index(ProjectRepository $projectRepository): Response
     {
+        // récuperer l'utilisateur connecté
+        $user = $this->getUser();
         return $this->render('project/index.html.twig', [
-            'projects' => $projectRepository->findAll(),
+            // récupérer le projet associé à l'utilisateur connecté
+            'projects' => $projectRepository->findBy(['user' => $user]),
         ]);
     }
 
@@ -29,6 +33,9 @@ class ProjectController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $project->setUser($user);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
@@ -45,6 +52,8 @@ class ProjectController extends AbstractController
     #[Route('/{id}', name: 'project_show', methods: ['GET'])]
     public function show(Project $project): Response
     {
+        // rajout $projects
+        
         return $this->render('project/show.html.twig', [
             'project' => $project,
         ]);

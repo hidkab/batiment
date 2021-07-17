@@ -4,8 +4,23 @@
 
 {% block body %}
     <h1>Project</h1>
+    
+        <div class="card border-success mb-3 text-center" style="max-width: 18rem;">
+            <div class="card-header bg-transparent border-success">Pour le :{{ project.createDate ? project.createDate|date('Y-m-d') : '' }}</div>
+            <div class="card-body text-success">
+                <h5 class="card-title">Project : {{project.name}}</h5>
+                <p class="card-text">{{ project.deadline ? project.deadline|date('Y-m-d') : '' }}</p>
+                <p class="card-text">{{ project.description }}</p>
+            </div>
+            <div class="card-footer bg-transparent border-success">
+                <a href="{{ path('project_index') }}">back to list</a>
+                <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
+            </div>
+        </div>
+        {# {{ include('project/_delete_form.html.twig') }} #}
+   
 
-    <table class="table">
+    {# <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -28,11 +43,8 @@
                 <td>{{ project.deadline ? project.deadline|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
-    </table>
+    </table> #}
 
-    <a href="{{ path('project_index') }}">back to list</a>
-
-    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
-
-    {{ include('project/_delete_form.html.twig') }}
+    
+    
 {% endblock %}
