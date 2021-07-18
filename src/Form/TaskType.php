@@ -28,8 +28,10 @@ class TaskType extends AbstractType
                 "label" => "Date limite",
                 "attr" => ["class" => "m-2"]
             ])
-            ->add('status')
-            // ->add('project')
+            ->add('status', null, [
+                "label" => "Statut",
+                "attr" => ["class" => "m-2"]
+            ])
         ;
     }
 

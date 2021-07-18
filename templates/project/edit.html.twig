@@ -7,9 +7,6 @@
         <h1>Modéfier le projet</h1>
 
         {{ include('project/_form.html.twig', {'button_label': 'Modéfier'}) }}
-    
-        {# la ligne ne s'affiche pas #}
         <a class= "btn btn-secondary" href="{{ path('project_index') }}">Rerour sur la liste des projets</a>
-        {# {{ include('project/_delete_form.html.twig') }} #}
     </div>
 {% endblock %}
