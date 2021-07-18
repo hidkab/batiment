@@ -12,12 +12,24 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('createDate')
-            ->add('deadline')
+            ->add('name', null, [
+                "label" => "Nom de la tâche",
+                "attr" => ["class" => "form-control m-2 border-dark w-25 m-auto"]
+            ])
+            ->add('description', null, [
+                "label" => "Description de la tâche",
+                "attr" => ["class" => "form-control m-2 border-dark w-25 m-auto"]
+            ])
+            ->add('createDate', null, [
+                "label" => "Date de création",
+                "attr" => ["class" => "m-2"]
+            ])
+            ->add('deadline', null, [
+                "label" => "Date limite",
+                "attr" => ["class" => "m-2"]
+            ])
             ->add('status')
-            ->add('project')
+            // ->add('project')
         ;
     }
 

@@ -33,6 +33,7 @@ class ProjectController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // le projet de l'utilisateur connecté 
             $user = $this->getUser();
             $project->setUser($user);
 
@@ -52,8 +53,6 @@ class ProjectController extends AbstractController
     #[Route('/{id}', name: 'project_show', methods: ['GET'])]
     public function show(Project $project): Response
     {
-        // rajout $projects
-        
         return $this->render('project/show.html.twig', [
             'project' => $project,
         ]);

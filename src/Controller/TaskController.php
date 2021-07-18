@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
+use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,22 +14,34 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/task')]
 class TaskController extends AbstractController
 {
-    #[Route('/', name: 'task_index', methods: ['GET'])]
-    public function index(TaskRepository $taskRepository): Response
+    #[Route('/{id}', name: 'task_index', methods: ['GET'])]
+    public function index(int $id, TaskRepository $taskRepository, ProjectRepository $projectRepository ): Response
     {
+        // récuperer le projet de l'utilisateur connecté
+        // $project = $this->getProject();
+        $project = $projectRepository->find(['id' => $id]);
         return $this->render('task/index.html.twig', [
-            'tasks' => $taskRepository->findAll(),
+            // récupérer le projet associé à l'utilisateur connecté
+            // 'tasks' => $taskRepository->findBy(['project' => $project]),
+            'tasks' => $taskRepository->findBy(['project' => $project]),
+            'id' => $id,
         ]);
     }
 
-    #[Route('/new', name: 'task_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    #[Route('/new/{id}', name: 'task_new', methods: ['GET', 'POST'])]
+    public function new(int $id, ProjectRepository $projectRepository, Request $request): Response
     {
+       
+        $project = $projectRepository->find(['id' => $id]);
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            
+            $task->setProject($project);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($task);
             $entityManager->flush();
@@ -39,6 +52,7 @@ class TaskController extends AbstractController
         return $this->renderForm('task/new.html.twig', [
             'task' => $task,
             'form' => $form,
+            'project' => $project,
         ]);
     }
 

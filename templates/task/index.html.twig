@@ -1,11 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Task index{% endblock %}
+{% block title %}Liste des tâches{% endblock %}
 
 {% block body %}
-    <h1>Task index</h1>
+    <h1 class="py-5 text-center">Liste des tâches</h1>
 
-    <table class="table">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+    {% for task in tasks %}
+                <div class="col-12 col-md-6 col-lg-4 card border-success mb-3 text-center mx-2" style="max-width: 25rem;">
+                    <div class="card-header bg-transparent border-success">
+                        Pour le :{{ task.createDate ? task.createDate|date('Y-m-d') : '' }}
+                    </div>
+                    <div class="card-body text-success">
+                        <h5 class="card-title">Tâche : {{task.name}}</h5>
+                        <p class="card-text">Crée le : {{ task.deadline ? task.deadline|date('Y-m-d') : '' }}</p>
+                        <p class="card-text">{{ task.description }}</p>
+                    </div>
+                    <div class="row card-footer bg-transparent border-success">
+                        <div class="col-sm-4">
+                            <a class="btn btn-sm btn-success" href="{{ path('task_edit', {'id': task.id}) }}">Modéfier</a>
+                        </div>
+                        <div class="col-sm-4">
+                            {# rederiger vers les taches de projet {{ path('task_index') }}  #}
+                            <a class="btn btn-sm btn-secondary" href="{{ path('task_index', {'id': task.id}) }}">Voir</a>
+                        </div>
+                        <div class="col-sm-4">
+                            {{ include('task/_delete_form.html.twig') }}
+                        </div>
+                        
+                    </div>
+                    
+                    {# <a class="btn btn-md btn-primary my-1" href="{{ path('project_index') }}">Retour à la liste des projet</a> #}
+                    <a class="btn btn-md btn-success my-1" href="{{ path('task_new', {'id': id}) }}">Nouvelle tâche</a>
+                    
+                </div>
+    {% endfor %}
+    {# <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -37,7 +68,7 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table> #}
 
-    <a href="{{ path('task_new') }}">Create new</a>
+    {# <a href="{{ path('task_new', {'id': id}) }}">Create new</a> #}
 {% endblock %}
