@@ -34,7 +34,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('task_index') }}">back to list</a>
+    <a href="{{ path('task_index', {'id': task.project.id}) }}">Retour à la liste des tâches</a>
 
     <a href="{{ path('task_edit', {'id': task.id}) }}">edit</a>
 

@@ -50,7 +50,7 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'project_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'project_show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(Project $project): Response
     {
         return $this->render('project/show.html.twig', [
@@ -58,7 +58,7 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'project_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'project_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
     public function edit(Request $request, Project $project): Response
     {
         $form = $this->createForm(ProjectType::class, $project);
@@ -76,7 +76,7 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'project_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'project_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function delete(Request $request, Project $project): Response
     {
         if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {

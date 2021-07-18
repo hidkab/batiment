@@ -10,12 +10,12 @@
     {% for project in projects %}
                 <div class="col-12 col-md-6 col-lg-4 card border-success mb-3 text-center mx-2" style="max-width: 25rem;">
                     <div class="card-header bg-transparent border-success">
-                        Pour le :{{ project.createDate ? project.createDate|date('Y-m-d') : '' }}
+                        Pour le : {{ project.createDate ? project.createDate|date('Y-m-d') : '' }}
                     </div>
                     <div class="card-body text-success">
-                        <h5 class="card-title">Project : {{project.name}}</h5>
-                        <p class="card-text">Crée le : {{ project.deadline ? project.deadline|date('Y-m-d') : '' }}</p>
-                        <p class="card-text">{{ project.description }}</p>
+                        <h5 class="card-title text-white">Project : {{project.name}}</h5>
+                        <p class="card-text text-white">Crée le : {{ project.deadline ? project.deadline|date('Y-m-d') : '' }}</p>
+                        <p class="card-text text-white">{{ project.description }}</p>
                     </div>
                     <div class="row card-footer bg-transparent border-success">
                         <div class="col-sm-4">

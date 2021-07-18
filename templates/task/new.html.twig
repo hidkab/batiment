@@ -8,6 +8,6 @@
 
         {{ include('task/_form.html.twig') }}
 
-        <a class="btn btn-secondary my-2" href="{{ path('task_index', {'id' : project.id}) }}">Retournez à la liste des tâches</a>
+        <a class="btn btn-secondary my-2" href="{{ path('task_index', {'id' : task.project.id}) }}">Retournez à la liste des tâches</a>
     </div>
 {% endblock %}
