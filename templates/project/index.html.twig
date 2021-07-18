@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des projets{% endblock %}
+
+{% block body %}
+    <h1 class="py-4 text-center">Liste des projets</h1>
+
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+    {% for project in projects %}
+                <div class="col-12 col-md-6 col-lg-4 card border-success mb-3 text-center mx-2" style="max-width: 25rem;">
+                    <div class="card-header bg-transparent border-success">
+                        Pour le : {{ project.createDate ? project.createDate|date('Y-m-d') : '' }}
+                    </div>
+                    <div class="card-body text-success">
+                        <h5 class="card-title text-white">Project : {{project.name}}</h5>
+                        <p class="card-text text-white">Crée le : {{ project.deadline ? project.deadline|date('Y-m-d') : '' }}</p>
+                        <p class="card-text text-white">{{ project.description }}</p>
+                    </div>
+                    <div class="row card-footer bg-transparent border-success">
+                        <div class="col-sm-4">
+                            <a class="btn btn-sm btn-success" href="{{ path('project_edit', {'id': project.id}) }}">Modéfier</a>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="btn btn-sm btn-secondary" href="{{ path('task_index', {'id': project.id}) }}">Voir</a>
+                        </div>
+                        <div class="col-sm-4">
+                            {{ include('project/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                    <a class="btn btn-md btn-success my-1" href="{{ path('project_new') }}">Nouveau prjoet</a>
+                </div>
+    {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

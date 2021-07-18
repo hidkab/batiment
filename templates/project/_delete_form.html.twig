@@ -1,0 +1,5 @@
+
+<form method="post" action="{{ path('project_delete', {'id': project.id}) }}" onsubmit="return confirm('Vous êtes sur de bien vouloir suprimer ce projer ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ project.id) }}">
+    <button class="btn btn-sm btn-danger">Suprimer</button>
+</form>

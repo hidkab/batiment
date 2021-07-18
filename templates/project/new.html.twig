@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau projet{% endblock %}
+
+{% block body %}
+    <div class="text-center">
+        <h1 class="py-4">Créer un nouveau projet</h1>
+
+        {{ include('project/_form.html.twig') }}
+
+        <a class="btn btn-secondary my-2" href="{{ path('project_index') }}">Retournez à la liste des projets</a>
+    </div>
+    
+{% endblock %}

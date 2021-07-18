@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modéfier un projet{% endblock %}
+
+{% block body %}
+    <div class="text-center">
+        <h1>Modéfier le projet</h1>
+
+        {{ include('project/_form.html.twig', {'button_label': 'Modéfier'}) }}
+        <a class= "btn btn-secondary" href="{{ path('project_index') }}">Rerour sur la liste des projets</a>
+    </div>
+{% endblock %}
